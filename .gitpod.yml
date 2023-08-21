@@ -1,0 +1,50 @@
+tasks:
+  - name: Start development environment
+    before: |
+      eval $(command gp env -e)
+      pnpm config set auto-install-peers true
+      git config pull.rebase false
+    init: |
+      pnpm i
+    command: |
+      pnpm vercel:link
+      pnpm vercel:pull
+      pnpm dev
+
+# List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
+ports:
+  - port: 5173
+    onOpen: open-preview
+    description: Website preview
+
+github:
+  prebuilds:
+    master: true
+    branches: true
+    pullRequests: true
+    pullRequestsFromForks: false
+    # add a check to pull requests (defaults to true)
+    addCheck: prevent-merge-on-error
+    # add a "Review in Gitpod" button as a comment to pull requests (defaults to false)
+    addComment: true
+vscode:
+  extensions:
+    - christian-kohler.npm-intellisense
+    - eamodio.gitlens
+    - esbenp.prettier-vscode
+    - christian-kohler.path-intellisense
+    - aaron-bond.better-comments
+    - meganrogge.template-string-converter
+    - leodevbro.blockman
+    - Gruntfuggly.todo-tree
+    - unifiedjs.vscode-mdx
+    - bradlc.vscode-tailwindcss
+    - PKief.material-icon-theme
+    - TeamHub.teamhub
+    - DanielSanMedium.dscodegpt
+    - svelte.svelte-vscode
+    - fivethree.vscode-svelte-snippets
+    - garlandcrow.vscode-svelte-pluskit-snippets
+    - formulahendry.auto-rename-tag
+    - IronGeek.vscode-env
+    - wix.vscode-import-cost
